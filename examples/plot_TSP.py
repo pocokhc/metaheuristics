@@ -14,8 +14,12 @@ def main():
     p.init()
     a.init(p)
 
-    for _ in range(1000):
+    max_score = a.getMaxScore()
+    for i in range(1000):
         a.step()
+        if max_score < a.getMaxScore():
+            max_score = a.getMaxScore()
+            print("{} {}".format(i, max_score))
     
     a.getMaxElement().view()
 
