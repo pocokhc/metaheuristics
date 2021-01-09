@@ -29,7 +29,7 @@ class PSO(IAlgorithm):
         for _ in range(self.particle_max):
             o = problem.create()
 
-            #v = [problem.MIN_VAL + (problem.MAX_VAL - problem.MIN_VAL) * random.random() for _ in range(problem.size)]
+            # 初期加速度
             v = [(problem.MAX_VAL - problem.MIN_VAL) * random.uniform(-1, 1) for _ in range(problem.size)]
 
             d = {

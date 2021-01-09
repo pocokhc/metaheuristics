@@ -292,10 +292,21 @@ def view():
 
     # 表示
     for name, alg2 in algs.items():
-        df = pd.DataFrame([ x["params"] for x in alg2])
         print(name)
-        print(df.describe())
 
+        # データ整形
+        d = []
+        for a in alg2:
+            print("{} {}".format(a["prob"], a["params"]))
+            d2 = {}
+            d2["name"] = a["prob"]
+            for k, v in a["params"].items():
+                d2[k] = v
+            d.append(d2)
+
+        df = pd.DataFrame(d)
+        print(df)
+    
 
 if __name__ == "__main__":
     main()
