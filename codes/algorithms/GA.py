@@ -22,13 +22,19 @@ class GA(IAlgorithm):
     def init(self, problem):
         self.problem = problem
         self.count = 0
+
+        self.best_individual = None
         self.individuals = []
         for _ in range(self.individual_max):
-            self.individuals.append(problem.create())
+            o = problem.create()
+            self.individuals.append(o)
+
+            if self.best_individual is None or self.best_individual.getScore() < o.getScore():
+                self.best_individual = o
+        self.sort()
 
     def getMaxElement(self):
-        self.sort()
-        return self.individuals[-1]
+        return self.best_individual
 
     def getElements(self):
         return self.individuals
@@ -37,8 +43,6 @@ class GA(IAlgorithm):
         self.individuals.sort(key=lambda x: x.getScore())
 
     def step(self):
-
-        self.sort()
 
         # 次世代用
         next_individuals = []
@@ -63,6 +67,12 @@ class GA(IAlgorithm):
         
         self.individuals = next_individuals
 
+        self.sort()
+
+        # 最高評価を保存
+        if self.best_individual.getScore() < self.individuals[-1].getScore():
+            self.best_individual = self.individuals[-1]
+
     def _select(self):
         if self.select_method == "roulette":
             weights = [x.getScore() for x in self.individuals]
@@ -82,6 +92,7 @@ class GA(IAlgorithm):
         c_genes1 = []
         c_genes2 = []
         for i in range(len(genes1)):  # 各遺伝子を走査
+
             # 50%の確率で遺伝子を入れ替える
             if random.random() < 0.5:
                 c_gene1 = genes1[i]

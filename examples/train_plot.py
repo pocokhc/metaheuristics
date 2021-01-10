@@ -41,7 +41,7 @@ def create(D, N):
         function_XinSheYang(D),
     ]
     algs= [
-        GA(N, mutation=0.5),
+        GA(N, save_elite=False, select_method="ranking", mutation=0.05),
         PfGA(mutation=0.5),
         ABC(N, follow_bee=10, visit_max=10),
         Bat(N, frequency_min=0, frequency_max=0.05, good_bat_rate=0.1, volume_init=0.5, pulse_convergence_value=0.9, pulse_convergence_speed=0.1),
