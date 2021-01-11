@@ -36,15 +36,20 @@ class DE(IAlgorithm):
 
         for i, agent in enumerate(self.agents):
 
-            # 2個体をランダムに選択
+            # 3個体をランダムに選択
             pos1 = self.agents[random.randint(0, len(self.agents)-1)].getArray()
             pos2 = self.agents[random.randint(0, len(self.agents)-1)].getArray()
+            pos3 = self.agents[random.randint(0, len(self.agents)-1)].getArray()
 
-            # 2個体の差分から新個体をだす
+            # 3個体から変異ベクトルをだす
+            m_pos = pos1 + self.scaling * (pos2 - pos3)
+
+            # 変異ベクトルで交叉させる(一様交叉)
             pos = agent.getArray()
+            ri = random.randint(0, len(pos))  # 1成分は必ず変異ベクトル
             for j in range(len(pos)):
-                if random.random() < self.crossover_rate:
-                    pos[j] = pos[j] + self.scaling * (pos2[j] - pos1[j])
+                if  ri == j or random.random() < self.crossover_rate:
+                    pos[j] = m_pos[j]
                 else:
                     pass  # 更新しない
 
