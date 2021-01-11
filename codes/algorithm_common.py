@@ -65,10 +65,13 @@ class AlgorithmCommon():
         mantegna アルゴリズム
         """
         #beta:  0.0 - 2.0
-        if beta < 0.0001:
-            beta = 0.0001
+        if beta < 0.005:
+            # 低すぎると OverflowError: (34, 'Result too large')
+            beta = 0.005
+        
         # siguma
         t = AlgorithmCommon.gamma(1+beta) * math.sin(math.pi*beta/2)
+
         t = t/( AlgorithmCommon.gamma((1+beta)/2) * beta * 2**((beta-1)/2) )
         siguma = t**(1/beta)
 
@@ -76,7 +79,8 @@ class AlgorithmCommon():
         v = AlgorithmCommon.random_normal()  # 標準正規分布に従う乱数
 
         s = (abs(v)**(1/beta))
-        if s == 0:
+        if s < 0.0001:
+            # 低すぎると ValueError: supplied range of [-inf, inf] is not finite
             s = 0.0001
         s = u / s
         return s

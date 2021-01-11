@@ -96,7 +96,7 @@ def objective_degree(prob_cls, alg_cls, timeout):
         elif alg_cls.__name__ == Cuckoo.__name__:
             alg = Cuckoo(
                 trial.suggest_int('nest_max', 2, 50),
-                trial.suggest_uniform('scaling_rate', 1, 1.0),
+                trial.suggest_uniform('scaling_rate', 0, 2.0),
                 trial.suggest_uniform('levy_rate', 0, 1.0),
                 trial.suggest_uniform('bad_nest_rate', 0, 1.0),
             )
