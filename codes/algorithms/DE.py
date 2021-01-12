@@ -36,10 +36,11 @@ class DE(IAlgorithm):
 
         for i, agent in enumerate(self.agents):
 
-            # 3個体をランダムに選択
-            pos1 = self.agents[random.randint(0, len(self.agents)-1)].getArray()
-            pos2 = self.agents[random.randint(0, len(self.agents)-1)].getArray()
-            pos3 = self.agents[random.randint(0, len(self.agents)-1)].getArray()
+            # iを含まない3個体をランダムに選択
+            r1, r2, r3 = random.sample([ j for j in range(len(self.agents)) if j != i ], 3)
+            pos1 = self.agents[r1].getArray()
+            pos2 = self.agents[r2].getArray()
+            pos3 = self.agents[r3].getArray()
 
             # 3個体から変異ベクトルをだす
             m_pos = pos1 + self.scaling * (pos2 - pos3)
