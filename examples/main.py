@@ -108,9 +108,9 @@ def objective_degree(prob_cls, alg_cls, timeout):
             )
         elif alg_cls.__name__ == DE.__name__:
             alg = DE(
-                trial.suggest_int('agent_max', 2, 50),
+                trial.suggest_int('agent_max', 4, 50),
                 trial.suggest_uniform('crossover_rate', 0, 1.0),
-                trial.suggest_uniform('scaling', 0, 1.0),
+                trial.suggest_uniform('scaling', 0, 2.0),
             )
         elif alg_cls.__name__ == Firefly.__name__:
             alg = Firefly(
