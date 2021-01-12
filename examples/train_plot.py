@@ -97,8 +97,8 @@ def anime2(func, alg):
         plt.cla()
 
         plt.plot(func_x, func_y, label=func.__class__.__name__, linewidth="0.5")
-        plt.plot(x_pos[i], y_score[i], 'o', color="orange")
-        plt.plot(max_pos[i], max_score[i], 'o', color="red")
+        plt.plot(x_pos[i], y_score[i], 'o', color="orange", markeredgecolor="black")
+        plt.plot(max_pos[i], max_score[i], 'o', color="red", markeredgecolor="black")
         plt.title('step={}'.format(i))
 
     ani = animation.FuncAnimation(fig, plot, N, interval=200)
@@ -163,8 +163,8 @@ def anime3(func, alg):
         plt.cla()
 
         plt.imshow(func_y, interpolation="nearest",  cmap="jet", extent=extent)
-        plt.plot(pos1[i], pos2[i], 'o', color="orange")
-        plt.plot(max_pos1[i], max_pos2[i], 'o', color="red")
+        plt.plot(pos1[i], pos2[i], 'o', color="orange", markeredgecolor="black")
+        plt.plot(max_pos1[i], max_pos2[i], 'o', color="red", markeredgecolor="black")
         plt.title('step={}'.format(i))
 
     ani = animation.FuncAnimation(fig, plot, N, interval=200)
