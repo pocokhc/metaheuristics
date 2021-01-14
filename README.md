@@ -24,6 +24,7 @@
 + 巡回セールスマン問題(Traveling Salesman Problem: TSP)
 + エイト・クイーン(Eight Queens)
 + ライフゲーム
++ 2048
 + [最適化アルゴリズムを評価するベンチマーク関数まとめ](https://qiita.com/tomitomi3/items/d4318bf7afbc1c835dda)より
   + Ackley function
   + Griewank function
