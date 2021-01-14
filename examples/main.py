@@ -17,12 +17,14 @@ from codes.problems.OneMax import OneMax
 from codes.problems.EightQueen import EightQueen
 from codes.problems.TSP import TSP
 from codes.problems.LifeGame import LifeGame
+from codes.problems.g2048 import g2048
 from codes.problems.function_Ackley import function_Ackley
 from codes.problems.function_Griewank import function_Griewank
 from codes.problems.function_Michalewicz import function_Michalewicz
 from codes.problems.function_Rastrigin import function_Rastrigin
 from codes.problems.function_Schwefel import function_Schwefel
 from codes.problems.function_StyblinskiTang import function_StyblinskiTang
+from codes.problems.function_XinSheYang import function_XinSheYang
 
 
 from codes.algorithms.GA import GA
@@ -47,6 +49,8 @@ def create_probrem(prob_cls):
         return TSP(50)
     if prob_cls.__name__ == LifeGame.__name__:
         return LifeGame(10, max_turn=5)
+    if prob_cls.__name__ == g2048.__name__:
+        return g2048(max_turn=50)
     if prob_cls.__name__ == function_Ackley.__name__:
         return function_Ackley(50)
     if prob_cls.__name__ == function_Griewank.__name__:
@@ -59,6 +63,8 @@ def create_probrem(prob_cls):
         return function_Schwefel(50)
     if prob_cls.__name__ == function_StyblinskiTang.__name__:
         return function_StyblinskiTang(50)
+    if prob_cls.__name__ == function_XinSheYang.__name__:
+        return function_XinSheYang(50)
     raise ValueError()
 
     
@@ -191,12 +197,14 @@ def main():
         EightQueen,
         TSP,
         LifeGame,
+        g2048,
         function_Ackley,
         function_Griewank,
         function_Michalewicz,
         function_Rastrigin,
         function_Schwefel,
         function_StyblinskiTang,
+        function_XinSheYang,
     ]
     algs = [
         GA,
