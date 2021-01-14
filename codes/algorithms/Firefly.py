@@ -10,13 +10,13 @@ from ..algorithm_common import IAlgorithm
 class Firefly(IAlgorithm):
     def __init__(self,
         firefly_max,
-        attract=1.0,
+        attracting_degree=1.0,
         absorb=10.0,
         alpha=1.0,
         is_normalization=True
     ):
         self.firefly_max = firefly_max
-        self.attract = attract
+        self.attracting_degree = attracting_degree
         self.absorb = absorb
         self.alpha = alpha
         self.is_normalization = is_normalization
@@ -67,7 +67,7 @@ class Firefly(IAlgorithm):
 
     # ランベルト・ベールの法則
     def light_intensity(self, d):
-        return self.attract * (math.exp(-self.absorb * (d**2)))
+        return self.attracting_degree * (math.exp(-self.absorb * (d**2)))
 
     def _r(self):
         r = random.randint(0, 1)

@@ -121,7 +121,7 @@ def objective_degree(prob_cls, alg_cls, timeout):
         elif alg_cls.__name__ == Firefly.__name__:
             alg = Firefly(
                 trial.suggest_int('firefly_max', 2, 50),
-                trial.suggest_uniform('attract', 0.0, 1.0),
+                trial.suggest_uniform('attracting_degree', 0.0, 1.0),
                 trial.suggest_uniform('absorb', 0.0, 50.0),
                 trial.suggest_uniform('alpha', 0.0, 1.0),
                 trial.suggest_categorical('is_normalization', [False, True]),
