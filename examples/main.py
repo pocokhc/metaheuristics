@@ -130,6 +130,7 @@ def objective_degree(prob_cls, alg_cls, timeout):
             alg = Harmony(
                 trial.suggest_int('harmony_max', 2, 50),
                 trial.suggest_uniform('bandwidth', 0.0, 1.0),
+                trial.suggest_categorical('enable_bandwidth_rate', [False, True]),
                 trial.suggest_uniform('select_rate', 0.0, 1.0),
                 trial.suggest_uniform('change_rate', 0.0, 1.0),
             )
