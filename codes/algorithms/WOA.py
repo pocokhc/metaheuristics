@@ -49,26 +49,21 @@ class WOA(IAlgorithm):
                 A = (2.0 * np.multiply(self._a, r1)) - self._a
                 C = 2.0 * r2
 
-                norm_A = np.linalg.norm(A)
-                if norm_A < 1:
+                if np.linalg.norm(A) < 1:
                     # 獲物に近づく
-                    best_pos = self.best_whale.getArray()
-
-                    D = np.linalg.norm(np.multiply(C, best_pos) - pos)
-                    pos = best_pos - np.multiply(A, D)
+                    new_pos = self.best_whale.getArray()
                 else:
                     # 獲物を探す
-                    # ランダムなクジラ
-                    r_pos = self.whales[random.randint(0, len(self.whales)-1)].getArray()
+                    new_pos = self.whales[random.randint(0, len(self.whales)-1)].getArray()
 
-                    D = np.linalg.norm(np.multiply(C, r_pos) - pos)
-                    pos = r_pos - np.multiply(A, D)
+                D = np.linalg.norm(np.multiply(C, new_pos) - pos)
+                pos = new_pos - np.multiply(A, D)
+
             else:
                 # 回る
                 best_pos = self.best_whale.getArray()
                 D = np.linalg.norm(best_pos - pos)
-                L = np.random.rand(self.problem.size)  # 0-1の乱数
-                
+                L = np.random.uniform(-1, 1, self.problem.size)  # [-1,1]の乱数
                 _b = self.logarithmic_spiral
                 pos = np.multiply(np.multiply(D, np.exp(_b*L)), np.cos(2.0*np.pi*L)) + best_pos
 
@@ -80,4 +75,7 @@ class WOA(IAlgorithm):
         self._a -= self.a_decrease
         if self._a < 0:
             self._a = 0
+
+    def spiral(self, x, L):
+        return x * np.exp(self.logarithmic_spiral * L) * np.cos(2.0 * np.pi * L)
 
