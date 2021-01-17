@@ -40,31 +40,31 @@ from codes.algorithms.PSO import PSO
 from codes.algorithms.WOA import WOA
 
 
-def create_probrem(prob_cls):
+def create_problem(prob_cls):
     if prob_cls.__name__ == OneMax.__name__:
-        return OneMax(1000)
+        return OneMax(10000)
     if prob_cls.__name__ == EightQueen.__name__:
         return EightQueen(20)
     if prob_cls.__name__ == TSP.__name__:
-        return TSP(50)
+        return TSP(80)
     if prob_cls.__name__ == LifeGame.__name__:
-        return LifeGame(10, max_turn=5)
+        return LifeGame(20, max_turn=5)
     if prob_cls.__name__ == g2048.__name__:
-        return g2048(max_turn=50)
+        return g2048(max_turn=350)
     if prob_cls.__name__ == function_Ackley.__name__:
         return function_Ackley(50)
     if prob_cls.__name__ == function_Griewank.__name__:
-        return function_Griewank(50)
+        return function_Griewank(100)
     if prob_cls.__name__ == function_Michalewicz.__name__:
-        return function_Michalewicz(50)
+        return function_Michalewicz(70)
     if prob_cls.__name__ == function_Rastrigin.__name__:
-        return function_Rastrigin(50)
+        return function_Rastrigin(70)
     if prob_cls.__name__ == function_Schwefel.__name__:
         return function_Schwefel(50)
     if prob_cls.__name__ == function_StyblinskiTang.__name__:
-        return function_StyblinskiTang(50)
+        return function_StyblinskiTang(80)
     if prob_cls.__name__ == function_XinSheYang.__name__:
-        return function_XinSheYang(50)
+        return function_XinSheYang(200)
     raise ValueError()
 
     
@@ -156,7 +156,7 @@ def objective_degree(prob_cls, alg_cls, timeout):
 
 
 def run(prob_cls, alg, epochs, timeout):
-    prob = create_probrem(prob_cls)
+    prob = create_problem(prob_cls)
     random.seed(1)
     prob.init()
     random.seed()
@@ -273,6 +273,12 @@ def view():
         d["min"] = df["score"].min()
         d["mean"] = df["score"].mean()
         d["max"] = df["score"].max()
+
+        #function_XinSheYangは値がすごく小さいので桁数で比較
+        if d["prob"] == "function_XinSheYang":
+            d["min"] = -int(str(d["min"]).split("e")[1])
+            d["mean"] = -int(str(d["mean"]).split("e")[1])
+            d["max"] = -int(str(d["max"]).split("e")[1])
 
         if d["prob"] not in probs:
             probs[d["prob"]] = []

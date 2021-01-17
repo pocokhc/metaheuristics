@@ -43,15 +43,15 @@ def create(D, N):
     algs= [
         GA(N, save_elite=False, select_method="ranking", mutation=0.05),
         PfGA(mutation=0.5),
-        ABC(N, follow_bee=10, visit_max=10),
+        ABC(N, follow_bee=15, visit_max=30),
         Bat(N, frequency_min=0, frequency_max=0.05, good_bat_rate=0.1, volume_init=0.5, pulse_convergence_value=0.9, pulse_convergence_speed=0.1),
-        Cuckoo(N),
-        Cuckoo_greedy(N, epsilon=0.1),
-        DE(N),
-        Firefly(N, attract=0.02, absorb=40.0, alpha=0.03, is_normalization=True),
-        Harmony(N, bandwidth=1),
-        PSO(N, inertia=0.1, global_acceleration=0.1, personal_acceleration=0.1),
-        WOA(N, a_decrease=0.01, logarithmic_spiral=0.1),
+        Cuckoo(N, scaling_rate=1.0, levy_rate=1.0, bad_nest_rate=0.1),
+        Cuckoo_greedy(N, epsilon=0.5, bad_nest_rate=0.1),
+        DE(N, crossover_rate=0, scaling=0.4),
+        Firefly(N, attracting_degree=0.08, absorb=50.0, alpha=0.02, is_normalization=True),
+        Harmony(N, bandwidth=1.0, enable_bandwidth_rate=True, select_rate=0.4, change_rate=0.9),
+        PSO(N, inertia=0.2, global_acceleration=0.2, personal_acceleration=0.2),
+        WOA(N, a_decrease=2/50, logarithmic_spiral=1),
     ]
     return funcs, algs
 
