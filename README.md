@@ -16,7 +16,7 @@
 + ハーモニーサーチ(Harmony Search)
 + くじらさんアルゴリズム(The Whale Optimization Algorithm: WOA)
 + 差分進化(Differential Evolution: DE)
-
++ タブーサーチ(Tabu Search)
 
 # 実装問題
 
@@ -70,9 +70,6 @@ examples にいくつか実行例が入っています。
 
 # TSPを簡単に探索した結果を出力します
 > python plot_TSP.py
-
-# ホタルアルゴリズムのLightIntensity関数調査用
-> python plot_Firefly.py
 
 ```
 
