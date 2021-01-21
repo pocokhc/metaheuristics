@@ -27,7 +27,9 @@ from codes.algorithms.Firefly import Firefly
 from codes.algorithms.Harmony import Harmony
 from codes.algorithms.PSO import PSO
 from codes.algorithms.WOA import WOA
-
+from codes.algorithms.GA_BLXa import GA_BLXa
+from codes.algorithms.GA_SPX import GA_SPX
+from codes.algorithms.Tabu import Tabu
 
 def create(D, N):
     funcs = [
@@ -52,6 +54,9 @@ def create(D, N):
         Harmony(N, bandwidth=1.0, enable_bandwidth_rate=True, select_rate=0.4, change_rate=0.9),
         PSO(N, inertia=0.2, global_acceleration=0.2, personal_acceleration=0.2),
         WOA(N, a_decrease=2/50, logarithmic_spiral=1),
+        GA_BLXa(N, save_elite=False, select_method="ranking", mutation=0.05, blx_a=0.1),
+        GA_SPX(N, save_elite=False, select_method="ranking", mutation=0.05),
+        Tabu(N, epsilon=0, tabu_list_size=10, tabu_range_rate=0.1),
     ]
     return funcs, algs
 

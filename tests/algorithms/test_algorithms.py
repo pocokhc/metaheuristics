@@ -38,6 +38,9 @@ from codes.algorithms.PfGA import PfGA
 from codes.algorithms.Harmony import Harmony
 from codes.algorithms.PSO import PSO
 from codes.algorithms.WOA import WOA
+from codes.algorithms.GA_BLXa import GA_BLXa
+from codes.algorithms.GA_SPX import GA_SPX
+from codes.algorithms.Tabu import Tabu
 
 
 class Test(unittest.TestCase):
@@ -56,6 +59,9 @@ class Test(unittest.TestCase):
             Harmony(10),
             PSO(10),
             WOA(10),
+            GA_BLXa(10),
+            GA_SPX(10),
+            Tabu(10),
         ]
 
         for o in test_patterns:
@@ -63,7 +69,7 @@ class Test(unittest.TestCase):
                 o.init(MockProblem())
                 for _ in range(100):
                     o.step()
-                self.assertTrue(o.count >= 100)
+                self.assertTrue(o.count >= 10)
                 self.assertEqual(o.getMaxScore(), 4)
 
 

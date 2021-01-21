@@ -38,6 +38,8 @@ from codes.algorithms.Firefly import Firefly
 from codes.algorithms.Harmony import Harmony
 from codes.algorithms.PSO import PSO
 from codes.algorithms.WOA import WOA
+from codes.algorithms.GA_BLXa import GA_BLXa
+from codes.algorithms.Tabu import Tabu
 
 
 def create_problem(prob_cls):
@@ -147,6 +149,21 @@ def objective_degree(prob_cls, alg_cls, timeout):
                 trial.suggest_uniform('a_decrease', 0.0, 0.1),
                 trial.suggest_uniform('logarithmic_spiral', 0.0, 2.0),
             )
+        elif alg_cls.__name__ == GA_BLXa.__name__:
+            alg = GA_BLXa(
+                trial.suggest_int('individual_max', 2, 50),
+                trial.suggest_categorical('save_elite', [False, True]),
+                trial.suggest_categorical('select_method', ["ranking", "roulette"]),
+                trial.suggest_uniform('mutation', 0.0, 1.0),
+                trial.suggest_uniform('blx_a', 0.0, 1.0),
+            )
+        elif alg_cls.__name__ == Tabu.__name__:
+            alg = Tabu(
+                trial.suggest_int('individual_max', 2, 50),
+                trial.suggest_uniform('epsilon', 0.0, 1.0),
+                trial.suggest_int('tabu_list_size', 1, 500),
+                trial.suggest_uniform('tabu_range_rate', 0.0, 1.0),
+            )
         else:
             raise ValueError
 
@@ -219,6 +236,8 @@ def main():
         Harmony,
         PSO,
         WOA,
+        GA_BLXa,
+        Tabu,
     ]
 
     optuna.logging.disable_default_handler()
