@@ -8,6 +8,9 @@
 # 実装アルゴリズム
 
 + 遺伝的アルゴリズム(Genetic Algorithm: GA)
++ 実数型遺伝的アルゴリズム
+  + GA BLX-α
+  + GA SPX
 + 人口蜂コロニーアルゴリズム(Artificial Bee Colony: ABC)
 + 粒子群最適化(Particle Swarm Optimization: PSO)
 + ホタルアルゴリズム(Firefly Algorithm)
