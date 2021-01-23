@@ -62,6 +62,7 @@ class GA_SPX(IAlgorithm):
             # 選択する
             v_list = []
             for _ in range(self.problem.size+1):
+                # ベクトルにして追加
                 v_list.append(self._select().getArray())
 
             # 交叉する
@@ -88,27 +89,31 @@ class GA_SPX(IAlgorithm):
         else:
             raise ValueError()
 
-    def _cross(self, v_list):
 
+    def _cross(self, v_list):
         # 重心
         g_vec = None
         for v in v_list:
             if g_vec is None:
-                g_vec = v
+                g_vec = v.copy()
             else:
                 g_vec += v
         g_vec /= len(v_list)
 
+        # 外側ベクトルを計算
         s_vec = []
         for v in v_list:
-            sx = g_vec + self.spx_e * (v * g_vec)
+            sx = g_vec + self.spx_e * (v - g_vec)
             s_vec.append(sx)
 
-        r1 = 0
+        # 子を生成
+        cx = None
         children = []
         for i, sx in enumerate(s_vec):
-            cx = r1 + sx
-            r1 = random.random() * (r1 + (sx - s_vec[i-1]))
+            if i == 0:
+                cx = sx.copy()
+            else:
+                cx = sx + random.random() * (cx - sx)
             
             children.append(self.problem.create(cx))
             self.count += 1
